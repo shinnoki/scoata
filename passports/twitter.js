@@ -9,7 +9,6 @@ module.exports = new TwitterStrategy({
   callbackURL: config.twitter.callback
   },
   function(token, tokenSecret, profile, done) {
-    console.log(profile);
     User.findOrCreate({
       username: profile.username
     }, function(err, user, created) {
