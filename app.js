@@ -5,6 +5,7 @@
 var express = require('express')
   , http = require('http')
   , path = require('path')
+  , url = require('url')
   , mongoose = require('mongoose')
   , passport = require('passport')
   , User = require('./models/user');
