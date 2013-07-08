@@ -4,9 +4,9 @@ var passport = require('passport')
   , User = require('../models/user');
 
 module.exports = new TwitterStrategy({
-  consumerKey: config.twitter.consumerKey,
-  consumerSecret: config.twitter.consumerSecret,
-  callbackURL: config.twitter.callbackURL
+  consumerKey: process.env.TWITTER_CONSUMER_KEY || config.twitter.consumerKey,
+  consumerSecret: process.env.TWITTER_CONSUMER_SECRET || config.twitter.consumerSecret,
+  callbackURL: process.env.TWITTER_CALLBACK_URL || config.twitter.callbackURL
   },
   function(token, tokenSecret, profile, done) {
     User.findOrCreate({
