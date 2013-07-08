@@ -1,7 +1,7 @@
 {
   "twitter" : {
-    "consumerKey" : "tmOEpCrLvsHfgg80HSt5w",
-    "consumerSecret" : "zmflolZ1cIKOdcm5qM0ACrK811hILNlCgDOXEi1JNG4",
-    "callbackURL" : "http://scoata.herokuapp.com/auth/twitter/callback"
+    "consumerKey" : "your-counsumer-key-here",
+    "consumerSecret" : "your-consumer-secret-here",
+    "callbackURL" : "your-callback-url-here"
   }
 }

@@ -6,7 +6,7 @@ var passport = require('passport')
 module.exports = new TwitterStrategy({
   consumerKey: config.twitter.consumerKey,
   consumerSecret: config.twitter.consumerSecret,
-  callbackURL: config.twitter.callback
+  callbackURL: config.twitter.callbackURL
   },
   function(token, tokenSecret, profile, done) {
     User.findOrCreate({

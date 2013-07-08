@@ -6,7 +6,8 @@
 
 img.profile_image {
   height: 25px;
-  margin-top: -10px;
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
 
 body {
