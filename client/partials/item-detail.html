@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>{{ item.name }}</h1>
+</div>
+
+<dl class="well">
+  <p>
+    <dt>Description:</dt>
+    <dd>{{ item.description }}</dd>
+  </p>
+  <p>
+    <dt>Min Value:</dt>
+    <dd>{{ item.minValue }}</dd>
+  </p>
+  <p>
+    <dt>Max Value:</dt>
+    <dd>{{ item.maxValue }}</dd>
+  </p>
+  <p>
+    <dt>Created at:</dt>
+    <dd>{{ item.created_at | date:'yyyy年MM月dd日 HH:mm' }}</dd>
+  </p>
+  <p>
+    <dt>Created by:</dt>
+    <dd>{{ item.created_by.name }}</dd>
+  </p>
+</dl>
+
+
+<a href="#" data-ng-click="remove()">delete</a></p>
+
+
+<!--
+<form class="form-horizontal" novalidate>
+  <div class="control-group">
+    Your record here:
+    <input class="input" type="number" ng-model="record.value" min ="{{ item.minValue }}" max="{{ item.maxValue }}" integer required>
+    <button class="btn" ng-click="submit()">OK</button>
+  </div>
+</form>
+-->

@@ -9,5 +9,11 @@ module.exports = {
     User.find({}, function(err, users) {
       res.jsonp(users);
     });
+  },
+  show: function(req, res) {
+    res.contentType('application/json');
+    User.findById(req.params.id, function(err, user) {
+      res.jsonp(user);
+    });
   }
 };

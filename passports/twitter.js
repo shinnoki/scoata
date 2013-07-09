@@ -10,7 +10,7 @@ module.exports = new TwitterStrategy({
   },
   function(token, tokenSecret, profile, done) {
     User.findOrCreate({
-      username: profile.username
+      name: profile.username
     }, function(err, user, created) {
       user.profile_image_url = profile._json.profile_image_url;
       user.save();

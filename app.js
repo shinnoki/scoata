@@ -13,9 +13,9 @@ var express = require('express')
 var app = express();
 
 // All environments
-app.set('views', __dirname + '/client/views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.favicon());
+app.use(express.favicon(path.join(__dirname, 'client/img/favicon.ico')));
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());

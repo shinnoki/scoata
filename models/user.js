@@ -2,9 +2,16 @@ var mongoose = require('mongoose')
   , findOrCreate = require('mongoose-findorcreate');
 
 var UserSchema = new mongoose.Schema({
-  username: String,
-  twitter_id: Number,
-  profile_image_url: String
+  name: {
+    type: String,
+    required: true
+  },
+  twitter_id: {
+    type: Number
+  },
+  profile_image_url: {
+    type: String
+  }
 });
 
 UserSchema.plugin(findOrCreate);

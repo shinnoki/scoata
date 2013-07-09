@@ -6,6 +6,9 @@
 
 img.profile_image {
   height: 25px;
+}
+
+img.login-status {
   margin-top: -5px;
   margin-bottom: -5px;
 }
@@ -13,6 +16,17 @@ img.profile_image {
 body {
   padding-top: 60px;
   padding-bottom: 20px;
+}
+
+
+@media (min-width: 768px) {
+  li.thumbnail.item {
+    height: 120px;
+    overflow: hidden;
+  }
+  ul.thumbnails li.span3:nth-child(4n+1) {
+    margin-left: 0px;
+  }
 }
 
 // Force cloak for Angular JS

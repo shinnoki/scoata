@@ -1,7 +1,9 @@
 var _ = require('underscore')
   , path = require('path')
   , passport = require('passport')
-  , UserCtrl = require('./controllers/users');
+  , userCtrl = require('./controllers/userCtrl')
+  , itemCtrl = require('./controllers/itemCtrl')
+  , recordCtrl = require('./controllers/recordCtrl');
 
 
 var routes = [
@@ -27,14 +29,54 @@ var routes = [
       res.redirect('/');
     }]
   },
-  // APIs
+  
+  // User
   {
-    path: '/users',
+    path: '/api/user',
     httpMethod: 'GET',
-    middleware: [UserCtrl.index]
+    middleware: [userCtrl.index]
+  },
+  {
+    path: '/api/user/:id',
+    httpMethod: 'GET',
+    middleware: [userCtrl.show]
   },
 
-  // All other get requests should be handled by AngularJS's client-side routing system
+  // Item
+  {
+    path: '/api/item',
+    httpMethod: 'GET',
+    middleware: [itemCtrl.index]
+  },
+  {
+    path: '/api/item',
+    httpMethod: 'POST',
+    middleware: [itemCtrl.add]
+  },
+  {
+    path: '/api/item/:id',
+    httpMethod: 'GET',
+    middleware: [itemCtrl.show]
+  },
+  {
+    path: '/api/item/:id',
+    httpMethod: 'DELETE',
+    middleware: [itemCtrl.remove]
+  },
+
+  // Record
+  {
+    path: '/api/record',
+    httpMethod: 'GET',
+    middleware: [recordCtrl.index]
+  },
+  {
+    path: '/api/record',
+    httpMethod: 'POST',
+    middleware: [recordCtrl.add]
+  },
+  // All other get requests should be handled
+  // by AngularJS's client-side routing system
   {
     path: '/*',
     httpMethod: 'GET',

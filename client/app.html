@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" data-ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<title>scoata</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+	</head>
+	<body>
+    <div class="navbar navbar-fixed-top" data-ng-controller="NavCtrl">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">scoata</a>
+          <ul class="nav">
+            <li><a href="/item">Item</a></li>
+            <li><a href="/user">User</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li ng-show="isLoggedIn">
+              <a href="#" data-ng-click="logout()"><img class="profile_image login_status" ng-src="{{ user.profile_image_url }}"> logout</a>
+            </li>
+            <li ng-hide="isLoggedIn">
+              <a href="#" data-ng-click="login()">sign in with twitter</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" ng-view></div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/controllers.js"></script>
+	</body>
+
+</html>

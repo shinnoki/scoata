@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1>Create New Item</h1>
+</div>
+
+<form>
+  <p>Name: <input class="input" type="text" ng-model="item.name" ng-maxlength="20" required></p>
+  <p>Min Value: <input class="input" type="text" ng-model="item.minValue"></p>
+  <p>Max Value: <input class="input" type="text" ng-model="item.maxValue"></p>
+  <p>Description: <textarea class="rounded" rows="8" cols="20" ng-model="item.description"></textarea></p>
+  <button class="btn" ng-click="submit()">OK</button>
+</form>
+<pre>{{ item }}</pre>
