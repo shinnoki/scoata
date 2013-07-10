@@ -1,4 +1,5 @@
-var Record = require('../models/record');
+var _ = require('underscore')
+  , Record = require('../models/record');
 
 module.exports = {
   index: function(req, res) {
@@ -17,6 +18,10 @@ module.exports = {
       } else {
         res.send(req.body);
       }
+    });
+  },
+  ranking: function(req, res) {
+    Record.find({item: req.params.item}, function(err, records) {
     });
   }
 };
