@@ -53,9 +53,12 @@ angular.module('app')
   }])
   .controller('ItemDetailCtrl', ['$scope', '$location', '$routeParams', '$resource',
     function($scope, $location, $routeParams, $resource) {
-      var Item = $resource('/api/item/:id', {userId:'@id'});
+      var Item = $resource('/api/item/:id');
       var Record = $resource('/api/record');
+      var ItemRanking = $resource('/api/record/:item');
+      
       $scope.item = Item.get({id: $routeParams.id});
+      $scope.records = ItemRanking.query({item: $routeParams.id});
 
       $scope.remove = function() {
         Item.remove({id: $routeParams.id}, function() {

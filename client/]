@@ -27,7 +27,7 @@
   </p>
 </dl>
 
-<h3>Add Your Record</h3>
+<h3>Your Record</h3>
 <form class="form-horizontal" novalidate>
   <div class="control-group">
     <input class="input" type="number" ng-model="record.value" min ="{{ item.minValue }}" max="{{ item.maxValue }}" integer required>
@@ -44,7 +44,7 @@
       <th>Created At</th>
     </tr>
   </thead>
-    <tr ng-repeat="record in records | orderBy:'value':true">
+    <tr ng-repeat="record in records | orderBy:value:false">
       <td><a href="/user/{{ record.user._id }}"ng-cloak><img class="profile_image" ng-src="{{ record.user.profile_image_url }}"> {{ record.user.name }} </a></td>
       <td>{{ record.value }}</td>
       <td>{{ record.created_at | date:'yyyy年MM月dd日 HH:mm' }}</td>

@@ -20,8 +20,12 @@ module.exports = {
       }
     });
   },
-  ranking: function(req, res) {
-    Record.find({item: req.params.item}, function(err, records) {
+  itemRanking: function(req, res) {
+    res.contentType('application/json');
+    Record.find({item: req.params.item})
+    .populate('user', 'name profile_image_url')
+    .exec(function(err, records) {
+      res.jsonp(records);
     });
   }
 };

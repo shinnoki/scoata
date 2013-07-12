@@ -78,7 +78,7 @@ var routes = [
   {
     path: '/api/record/:item',
     httpMethod: 'GET',
-    middleware: [recordCtrl.ranking]
+    middleware: [recordCtrl.itemRanking]
   },
   // All other get requests should be handled
   // by AngularJS's client-side routing system
