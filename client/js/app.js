@@ -31,6 +31,9 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: '/partials/item-detail.html',
         controller: 'ItemDetailCtrl'
       })
+      .when('/contest', {
+        templateUrl: '/partials/contest-list.html',
+      })
       .when('/404', {
         templateUrl: '/partials/404.html'
       })

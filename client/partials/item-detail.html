@@ -1,6 +1,8 @@
 <div class="page-header">
   <h1>{{ item.name }}</h1>
-  <a href="#" data-ng-click="remove()">delete</a></p>
+  <div ng-show="editable">
+    <a href="#" data-ng-click="remove()">delete</a></p>
+  </div>
 </div>
 
 <h3>Properties</h3>
@@ -27,7 +29,7 @@
   </p>
 </dl>
 
-<h3>Add Your Record</h3>
+<h3>Your Record(s)</h3>
 <form class="form-horizontal" novalidate>
   <div class="control-group">
     <input class="input" type="number" ng-model="record.value" min ="{{ item.minValue }}" max="{{ item.maxValue }}" integer required>
@@ -42,11 +44,14 @@
       <th>User</th>
       <th>Value</th>
       <th>Created At</th>
+      <th></th>
     </tr>
   </thead>
     <tr ng-repeat="record in records | orderBy:'value':true">
-      <td><a href="/user/{{ record.user._id }}"ng-cloak><img class="profile_image" ng-src="{{ record.user.profile_image_url }}"> {{ record.user.name }} </a></td>
+      <td><a href="/user/{{ record.user._id }}" ng-cloak><img class="profile_image" ng-src="{{ record.user.profile_image_url }}"> {{ record.user.name }} </a></td>
       <td>{{ record.value }}</td>
       <td>{{ record.created_at | date:'yyyy年MM月dd日 HH:mm' }}</td>
+      <td ng-show="record.user._id==user._id"><a href="#" data-ng-click="removeRecord(record)">
+          delete</a></td>
     </tr>
 </table>

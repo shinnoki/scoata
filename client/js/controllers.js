@@ -1,23 +1,13 @@
 'use strict';
 
 angular.module('app')
-  .controller('NavCtrl', ['$scope', '$window', '$cookieStore',
-    function($scope, $window, $cookieStore) {
+  .controller('NavCtrl', ['$scope', '$cookieStore', 'Auth',
+    function($scope, $cookieStore, Auth) {
+      $scope.user = Auth.user;
+      $scope.isLoggedIn = Auth.isLoggedIn;
 
-      var user = $cookieStore.get('user');
-      $cookieStore.remove('user');
-      if (user) {
-        $scope.user = user;
-        $scope.isLoggedIn = true;
-      }
-
-      $scope.login = function() {
-        $window.location.href = '/auth/twitter';
-      };
-
-      $scope.logout = function() {
-        $window.location.href = '/logout';
-      };
+      $scope.login = Auth.login;
+      $scope.logout = Auth.logout;
   }])
   .controller('TopCtrl', ['$scope', '$resource',
     function($scope, $resource) {
@@ -36,9 +26,8 @@ angular.module('app')
   }])
   .controller('ItemListCtrl', ['$scope', '$resource',
     function($scope, $resource) {
-      var Items = $resource('/api/item');
-
-      $scope.items = Items.query();
+      var Item = $resource('/api/item');
+      $scope.items = Item.query();
   }])
   .controller('ItemNewCtrl', ['$scope', '$location', '$resource',
     function($scope, $location, $resource) {
@@ -51,14 +40,20 @@ angular.module('app')
         });
       };
   }])
-  .controller('ItemDetailCtrl', ['$scope', '$location', '$routeParams', '$resource',
-    function($scope, $location, $routeParams, $resource) {
+  .controller('ItemDetailCtrl', ['$scope', '$location', '$routeParams', '$resource', 'Auth',
+    function($scope, $location, $routeParams, $resource, Auth) {
       var Item = $resource('/api/item/:id');
-      var Record = $resource('/api/record');
-      var ItemRanking = $resource('/api/record/:item');
+      var Record = $resource('/api/record/:id');
       
       $scope.item = Item.get({id: $routeParams.id});
-      $scope.records = ItemRanking.query({item: $routeParams.id});
+      $scope.records = Record.query({item: $routeParams.id});
+      $scope.user = Auth.user;
+      if (Auth.isLoggedIn) {
+        if ($scope.item.created_by == null ||
+          $scope.item.created_by._id == Auth.user._id) {
+          $scope.editable = true;
+        }
+      }
 
       $scope.remove = function() {
         Item.remove({id: $routeParams.id}, function() {
@@ -69,8 +64,16 @@ angular.module('app')
       $scope.submit = function() {
         var record = new Record($scope.record);
         record.item = $routeParams.id;
-        record.$save(function() {
-          $location.path('/');
+        record.$save(function(data) {
+          $scope.records.push(data);
+        });
+      };
+
+      $scope.removeRecord = function(record) {
+        // routing conflictions shuld be fixed
+        Record.remove({id: record._id}, function() {
+          var index = $scope.records.indexOf(record);
+          $scope.records.splice(index, 1);
         });
       };
   }]);

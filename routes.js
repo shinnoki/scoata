@@ -76,9 +76,9 @@ var routes = [
     middleware: [recordCtrl.add]
   },
   {
-    path: '/api/record/:item',
-    httpMethod: 'GET',
-    middleware: [recordCtrl.itemRanking]
+    path: '/api/record/:id',
+    httpMethod: 'DELETE',
+    middleware: [recordCtrl.remove]
   },
   // All other get requests should be handled
   // by AngularJS's client-side routing system
@@ -88,7 +88,8 @@ var routes = [
     middleware: [function(req, res) {
       if(req.user) {
         res.cookie('user', JSON.stringify({
-            'username': req.user.username,
+            '_id': req.user._id,
+            'name': req.user.name,
             'profile_image_url': req.user.profile_image_url
         }));
       }

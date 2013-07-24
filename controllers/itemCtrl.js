@@ -14,11 +14,6 @@ module.exports = {
       .exec(function(err, item) {
         res.jsonp(item);
       });
-    // Item.findById(req.params.id, function(err, item) {
-    //   Item.populate(item, 'created_by', function() {
-    //     res.jsonp(item);
-    //   });
-    // });
   },
   add: function(req, res) {
     var item = new Item(req.body);
@@ -33,12 +28,20 @@ module.exports = {
     });
   },
   remove: function(req, res) {
-    Item.findByIdAndRemove(req.params.id, function(err) {
+    Item.findById(req.params.id, function(err, item) {
       if (err) {
-        res.send(err);
         console.log(err);
+        res.send(400, err);
+      } else if (req.user == undefined ||
+          item.created_by != undefined &&
+          !item.created_by.equals(req.user._id)) {
+        console.log(req.user._id);
+        console.log(item.created_by);
+        res.send(402);
       } else {
-        res.send(req.body);
+        item.remove(function () {
+          res.send(200);
+        });
       }
     });
   }
